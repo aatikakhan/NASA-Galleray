@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'screens/detail.dart';
 import 'screens/home.dart';
 import 'service/data_provider.dart';
 
@@ -24,13 +25,13 @@ class NASAGallery extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          brightness: Brightness.light,
           primarySwatch: Colors.grey,
           canvasColor: Colors.transparent,
         ),
         initialRoute: Home.id,
         routes: {
           Home.id: (context) => const Home(),   
+          Detail.id: (context) => const Detail(),
         },
       ),
     );
