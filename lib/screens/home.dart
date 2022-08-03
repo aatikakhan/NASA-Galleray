@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:nasa_gallery/model/data_object.dart';
+import 'package:nasa_gallery/screens/detail.dart';
 import 'package:nasa_gallery/widgets/imageloader.dart';
 import 'package:provider/provider.dart';
 
+import '../arguments/arguments.dart';
 import '../service/data_provider.dart';
 
 class Home extends StatelessWidget {
-  static String id = 'home';
-    static String detailRoute = 'detail';
-
+  static String id = '/home';
 
   const Home({Key? key}) : super(key: key);
 
@@ -17,7 +17,9 @@ class Home extends StatelessWidget {
     List<DataObject>? obj;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: const Text("Home")),
+      appBar: AppBar(
+        title: const Text("NASA Images"),
+      ),
       body: FutureBuilder(
         future: Provider.of<DataProvider>(context).loadData(context),
         builder: (context, snapshot) {
@@ -30,17 +32,22 @@ class Home extends StatelessWidget {
               itemCount: obj == null ? 0 : obj!.length,
               itemBuilder: (BuildContext conext, i) {
                 return ElevatedButton(
-                  style: ButtonStyle(
-                    // backgroundColor: MaterialStateProperty.all(Colors.white) ,
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      const RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.black),
-                      ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                    shape: const RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.black),
                     ),
                   ),
-                  
-                  onPressed: () =>Navigator.pushNamed(context, detailRoute),
-                  child: ImageWidget(imageUrl: obj![i].url!,)
+                  onPressed: (() {
+                    Navigator.pushNamed(
+                      context,
+                      Detail.id,
+                      arguments: Arguments(obj![i].url!, obj!, i),
+                    );
+                  }),
+                  child: ImageWidget(
+                    imageUrl: obj![i].url!,
+                  ),
                 );
               },
             );

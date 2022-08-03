@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class ImageWidget extends StatelessWidget {
   final String imageUrl;
@@ -11,6 +9,7 @@ class ImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.network(
       imageUrl,
+      fit: BoxFit.fill,
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) {
           return child;

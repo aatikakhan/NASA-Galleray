@@ -5,8 +5,7 @@ import 'screens/detail.dart';
 import 'screens/home.dart';
 import 'service/data_provider.dart';
 
-
-void main()  {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const NASAGallery());
 }
@@ -30,11 +29,10 @@ class NASAGallery extends StatelessWidget {
         ),
         initialRoute: Home.id,
         routes: {
-          Home.id: (context) => const Home(),   
+          Home.id: (context) => const Home(),
           Detail.id: (context) => const Detail(),
         },
       ),
     );
   }
 }
-
