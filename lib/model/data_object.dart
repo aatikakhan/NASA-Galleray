@@ -18,7 +18,7 @@ class DataObject{
   String? url;
 
   DataObject(
-      {this.copyright,
+      {this.copyright ,
       this.date,
       this.explanation,
       this.hdurl,

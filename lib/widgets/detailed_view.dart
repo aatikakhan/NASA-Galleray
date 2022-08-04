@@ -27,19 +27,19 @@ class DetailWidget extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * .5,
                   child: Text(
-                    '- ${e.copyright!}',
+                    '- ${e.copyright ?? ''}',
                     maxLines: 2,
                     style: const TextStyle(fontStyle: FontStyle.italic),
                   ),
                 ),
-                Text('Date: ${e.date!}'),
+                Text('Date: ${e.date ?? ''}'),
               ],
             ),
           ),
           space,
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(e.explanation!),
+            child: Text(e.explanation ?? ''),
           ),
           space
         ],
