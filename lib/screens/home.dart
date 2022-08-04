@@ -22,9 +22,9 @@ class Home extends StatelessWidget {
       ),
       body: FutureBuilder(
         future: Provider.of<DataProvider>(context).loadData(context),
-        builder: (context, snapshot) {
+        builder: (context,AsyncSnapshot<List<DataObject>?> snapshot) {
           if (snapshot.hasData) {
-            obj = snapshot.data as List<DataObject>?;
+            obj = snapshot.data;
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -43,7 +43,6 @@ class Home extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       Detail.id,
-                      arguments: Arguments(obj![i].url!, obj!, i),
                     );
                   }),
                   child: ImageWidget(

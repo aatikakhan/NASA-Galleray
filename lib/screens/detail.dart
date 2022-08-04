@@ -12,23 +12,21 @@ class Detail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<DataObject> imageList =
-        Provider.of<DataProvider>(context, listen: false).objList!;
+    List<DataObject>? imageList = Provider.of<DataProvider>(context).objList;
     int index = Provider.of<DataProvider>(context, listen: false).index!;
 
     return Scaffold(
       body: Center(
         child: CarouselSlider(
           options: CarouselOptions(
-            initialPage:
-                Provider.of<DataProvider>(context, listen: false).index!,
+            initialPage: index,
             height: MediaQuery.of(context).size.height,
             viewportFraction: 1,
             enlargeCenterPage: true,
             enableInfiniteScroll: true,
             autoPlay: false,
           ),
-          items: imageList
+          items: imageList!
               .map((e) => Container(
                     color: Colors.white,
                     child: Column(
