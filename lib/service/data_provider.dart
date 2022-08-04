@@ -7,6 +7,8 @@ import '../model/data_object.dart';
 class DataProvider with ChangeNotifier {
   List<DataObject>? objList;
 
+  int? index = 0;
+
   Future<List<DataObject>?> loadData(BuildContext context) async {
     await DefaultAssetBundle.of(context)
         .loadString('assets/data.json')

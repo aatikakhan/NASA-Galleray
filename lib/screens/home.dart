@@ -39,6 +39,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   onPressed: (() {
+                    Provider.of<DataProvider>(context, listen: false).index = i;
                     Navigator.pushNamed(
                       context,
                       Detail.id,

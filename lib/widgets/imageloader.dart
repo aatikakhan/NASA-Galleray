@@ -14,11 +14,13 @@ class ImageWidget extends StatelessWidget {
         if (loadingProgress == null) {
           return child;
         }
-        return CircularProgressIndicator(
-          value: loadingProgress.expectedTotalBytes != null
-              ? loadingProgress.cumulativeBytesLoaded /
-                  loadingProgress.expectedTotalBytes!.toInt()
-              : 0,
+        return Center(
+          child: CircularProgressIndicator(
+            value: loadingProgress.expectedTotalBytes != null
+                ? loadingProgress.cumulativeBytesLoaded /
+                    loadingProgress.expectedTotalBytes!.toInt()
+                : 0,
+          ),
         );
       },
     );
