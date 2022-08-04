@@ -5,6 +5,7 @@ import 'package:nasa_gallery/widgets/imageloader.dart';
 import 'package:provider/provider.dart';
 
 import '../service/data_provider.dart';
+import '../widgets/detailed_view.dart';
 
 class Detail extends StatelessWidget {
   static const id = '/detail';
@@ -31,7 +32,7 @@ class Detail extends StatelessWidget {
                     color: Colors.white,
                     child: Column(
                       children: <Widget>[
-                        Container(
+                        SizedBox(
                             height: MediaQuery.of(context).size.height * .4,
                             child: ImageWidget(imageUrl: e.url!)),
                         Expanded(child: DetailWidget(e: e))
@@ -45,48 +46,3 @@ class Detail extends StatelessWidget {
   }
 }
 
-class DetailWidget extends StatelessWidget {
-  final DataObject e;
-  const DetailWidget({Key? key, required this.e}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    Widget space = const SizedBox(height: 16);
-
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          space,
-          Text(
-            e.title!,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-          ),
-          space,
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * .5,
-                  child: Text(
-                    '- ${e.copyright!}',
-                    maxLines: 2,
-                    style: const TextStyle(fontStyle: FontStyle.italic),
-                  ),
-                ),
-                Text('Date: ${e.date!}'),
-              ],
-            ),
-          ),
-          space,
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(e.explanation!),
-          ),
-          space
-        ],
-      ),
-    );
-  }
-}

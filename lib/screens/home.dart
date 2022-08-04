@@ -4,7 +4,6 @@ import 'package:nasa_gallery/screens/detail.dart';
 import 'package:nasa_gallery/widgets/imageloader.dart';
 import 'package:provider/provider.dart';
 
-import '../arguments/arguments.dart';
 import '../service/data_provider.dart';
 
 class Home extends StatelessWidget {
