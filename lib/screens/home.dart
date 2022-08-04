@@ -16,12 +16,13 @@ class Home extends StatelessWidget {
     List<DataObject>? obj;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
+      appBar: AppBar(key: const Key("NASA Images"),
         title: const Text("NASA Images"),
       ),
       body: FutureBuilder(
+        key: const Key("GlobalKey"),
         future: Provider.of<DataProvider>(context).loadData(context),
-        builder: (context,AsyncSnapshot<List<DataObject>?> snapshot) {
+        builder: (context, AsyncSnapshot<List<DataObject>?> snapshot) {
           if (snapshot.hasData) {
             obj = snapshot.data;
             return GridView.builder(
@@ -31,6 +32,7 @@ class Home extends StatelessWidget {
               itemCount: obj == null ? 0 : obj!.length,
               itemBuilder: (BuildContext conext, i) {
                 return ElevatedButton(
+                  key: const ValueKey("Button"),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white,
                     shape: const RoundedRectangleBorder(
@@ -45,13 +47,15 @@ class Home extends StatelessWidget {
                     );
                   }),
                   child: ImageWidget(
+                    key: const Key("imageWidget"),
                     imageUrl: obj![i].url!,
                   ),
                 );
               },
             );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child: CircularProgressIndicator());
           }
         },
       ),

@@ -9,7 +9,17 @@ class ImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.network(
       imageUrl,
-      fit: BoxFit.fill,
+      fit: BoxFit.cover,
+      frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+        if (wasSynchronouslyLoaded == true) {
+          return Image.asset(
+            'assets/error_image.png',
+            fit: BoxFit.cover,
+          );
+        } else {
+          return child;
+        }
+      },
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) {
           return child;

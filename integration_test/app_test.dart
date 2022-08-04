@@ -10,7 +10,7 @@ void main() {
     binding.framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
 
     testWidgets('Scrolling test', (tester) async {
-      await tester.pumpWidget(NASAGallery());
+      await tester.pumpWidget(const NASAGallery());
 
       final listFinder = find.byType(GridView);
 
@@ -18,7 +18,7 @@ void main() {
         await tester.fling(listFinder, const Offset(0, -500), 10000);
         await tester.pumpAndSettle();
 
-        await tester.fling(listFinder, Offset(0, 500), 10000);
+        await tester.fling(listFinder, const Offset(0, 500), 10000);
         await tester.pumpAndSettle();
       }, reportKey: 'scrolling_summary');
     });

@@ -5,9 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:nasa_gallery/main.dart';
 import 'package:nasa_gallery/model/data_object.dart';
-import 'package:nasa_gallery/screens/detail.dart';
 import 'package:nasa_gallery/service/data_provider.dart';
-import 'package:nasa_gallery/widgets/imageloader.dart';
 import 'package:provider/provider.dart';
 
 class MockContext extends Mock implements BuildContext {}
@@ -21,46 +19,42 @@ Widget createHomeScreen() => ChangeNotifierProvider<DataProvider>(
 
 void main() {
   group('Home Page Widget Tests', () {
-    // BEGINNING OF NEW CONTENT
-    testWidgets('Testing if GridView shows up', (tester) async {
+    testWidgets('Testing for Scaffold', (tester) async {
       await tester.pumpWidget(createHomeScreen());
-      expect(find.byType(GridView), findsOneWidget);
-      expect(find.text("NASA Images"), findsOneWidget);
+      expect(find.byType(Scaffold), findsOneWidget);
+      expect(find.byKey(const Key("GlobalKey")), findsOneWidget);
     });
-    // END OF NEW CONTENT
 
     testWidgets('Test for Scrolling', (tester) async {
-      DataProvider dataProvider = DataProvider();
+      await tester.pumpWidget(createHomeScreen());
+      await tester.pumpAndSettle( const Duration(seconds: 20));
+      // expect(
+      //   find.byKey(const ValueKey("Button0")),
+      //   findsOneWidget,
+      // );
+
+
+  DataProvider dataProvider = DataProvider();
 
       BuildContext context = MockContext();
-      List<DataObject>? objList;
+      List<DataObject>? objList = await DataProvider().loadData(context);
 
-      Future<List<DataObject>?> loadData(BuildContext context) async {
-        await DefaultAssetBundle.of(context)
-            .loadString('assets/data.json')
-            .then((value) {
-          objList = (json.decode(value.toString()) as List)
-              .map((data) => DataObject.fromJson(data as Map<String, dynamic>))
-              .toList();
-        });
-        return objList;
-      }
-
-      await tester.pumpWidget(createHomeScreen());
+      await tester.pumpWidget(createHomeScreen(), const Duration(seconds: 20));
+      await tester.pumpAndSettle();
+      // expect(
+      //   find.byKey(const ValueKey("Button")),
+      //   findsWidgets,
+      // );
+    
+      await tester.fling(find.byType(GridView), const Offset(0, -200), 3000);
+      await tester.pumpAndSettle();
       expect(
-          find.byWidget(ElevatedButton(
-            onPressed: () {
-              dataProvider.index = 1;
-
-              Navigator.pushNamed(context, Detail.id);
-            },
-            child: ImageWidget(
-              imageUrl: objList![1].url!,
+          find.byWidget(GridView(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
             ),
           )),
-          findsOneWidget);
-      await tester.fling(find.byType(GridView), Offset(0, -200), 3000);
-      await tester.pumpAndSettle();
+          findsNothing);
       expect(find.text('Item 0'), findsNothing);
     });
   });
