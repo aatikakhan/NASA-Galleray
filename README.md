@@ -1,16 +1,12 @@
 # nasa_gallery
 
-A new Flutter project.
+An app for displaying some of NASA images using json data. 
 
-## Getting Started
+### State management: [Provider](https://pub.dev/packages/provider)
+### Code genration for models using build runner refer [here](https://pub.dev/packages/json_serializable)
 
-This project is a starting point for a Flutter application.
+### Preview:![giflink](https://user-images.githubusercontent.com/39854591/182903081-e17f5fb3-250d-46f6-a142-ec3009a06a17.mov)
 
-A few resources to get you started if this is your first Flutter project:
+It covers some tests as well still looking for improvements. Let me know if you can help :)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
