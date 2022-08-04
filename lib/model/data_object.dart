@@ -1,4 +1,13 @@
-class DataObject {
+
+import 'package:json_annotation/json_annotation.dart';
+
+part 'data_object.g.dart';
+
+@JsonSerializable(createToJson: false, explicitToJson: true)
+class DataObject{
+  factory DataObject.fromJson(Map<String, dynamic> json) => _$DataObjectFromJson(json);
+
+
   String? copyright;
   String? date;
   String? explanation;
@@ -18,14 +27,5 @@ class DataObject {
       this.title,
       this.url});
 
-  DataObject.fromJson(Map<String, dynamic> json) {
-    copyright = json['copyright'] ?? '';
-    date = json['date'] ?? '';
-    explanation = json['explanation'] ?? '';
-    hdurl = json['hdurl'];
-    mediaType = json['media_type'] ?? '';
-    serviceVersion = json['service_version'] ?? '';
-    title = json['title'] ?? '';
-    url = json['url'] ?? '';
-  }
 }
+
