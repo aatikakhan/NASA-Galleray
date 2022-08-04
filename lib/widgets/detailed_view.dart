@@ -11,17 +11,18 @@ class DetailWidget extends StatelessWidget {
     Widget space = const SizedBox(height: 16);
 
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          space,
-          Text(
-            e.title!,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-          ),
-          space,
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            space,
+            Text(
+              e.title!,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+            space,
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
@@ -35,14 +36,11 @@ class DetailWidget extends StatelessWidget {
                 Text('Date: ${e.date ?? ''}'),
               ],
             ),
-          ),
-          space,
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(e.explanation ?? ''),
-          ),
-          space
-        ],
+            space,
+            Text(e.explanation ?? ''),
+            space
+          ],
+        ),
       ),
     );
   }

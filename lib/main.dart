@@ -17,10 +17,8 @@ class NASAGallery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Enables the Provider Package
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<DataProvider>(create: (_) => DataProvider()),
-      ],
+    return ChangeNotifierProvider<DataProvider>(
+      create: (context) => DataProvider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
